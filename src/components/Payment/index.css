@@ -1,0 +1,36 @@
+#payment-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 15%;
+  text-align: center;
+}
+
+.payment-head {
+  margin-bottom: none;
+  color: balck;
+  font-size: 20px;
+  font-family: roboto;
+}
+
+.payment-talk {
+  color: black;
+  font-size: medium;
+  font-family: roboto;
+}
+
+#goToHomepage {
+  background-color: #1de81c;
+  text-decoration: none;
+  border: none;
+  height: 30px;
+  width: fit-content;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#linkHome {
+  text-decoration: none;
+  color: whitesmoke;
+}

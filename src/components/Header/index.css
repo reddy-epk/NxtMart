@@ -1,0 +1,96 @@
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f7f7f7;
+  padding: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  width: 95%;
+  max-width: 1350px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 0px;
+}
+
+.website-logo {
+  width: 80px;
+  margin-left: 40px;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  flex: 1;
+  list-style-type: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.nav-link {
+  font-family: 'Roboto';
+  text-decoration: none;
+  margin-right: 35px;
+  font-weight: 400;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+}
+
+.another-radium {
+  font-family: 'Roboto';
+  text-decoration: none;
+  margin-right: 35px;
+  font-weight: 400;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+}
+.nav-link:hover {
+  color: #fe0000;
+}
+
+.another-radium:hover {
+  color: #1de81c;
+}
+
+.reddy {
+  margin-top: 18px;
+  margin-left: 0px;
+  margin-right: 5px;
+}
+
+.logic {
+  display: flex;
+  align-items: center;
+}
+
+.buttonsy {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding-left: 5px;
+  display: flex;
+}
+
+.buttonsy:hover {
+  color: #0000fe;
+}
+
+.sizer {
+  font-size: 20px;
+}

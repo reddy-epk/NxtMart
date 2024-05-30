@@ -1,0 +1,155 @@
+input[type='password']::-ms-reveal {
+  display: none;
+}
+
+.login-form-container {
+  background-image: url('https://res.cloudinary.com/dqfqwre2q/image/upload/v1714284745/Background_hdqiia.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+#form-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 350px;
+}
+
+#username {
+  background: url('https://res.cloudinary.com/dqfqwre2q/image/upload/v1713707550/Group_9_lpec8d.png');
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  padding-left: 30px;
+  padding-right: 50px;
+}
+#password {
+  background: url('https://res.cloudinary.com/dqfqwre2q/image/upload/v1713707550/lock_uydetb.png');
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  padding-left: 30px;
+}
+
+.login-logo {
+  width: 75px;
+}
+
+@media screen and (min-width: 992px) {
+  .login-form-container {
+    background-image: url('https://res.cloudinary.com/dqfqwre2q/image/upload/v1713680012/Background_kr46mc.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .form-container {
+    width: 350px;
+    flex-shrink: 0;
+    box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
+    padding: 64px 48px 64px 48px;
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+}
+
+#passco {
+  display: flex;
+  align-items: center;
+}
+
+.check {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.check-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.show {
+  color: black;
+  font-family: roboto;
+  font-size: 14px;
+}
+.input-label {
+  margin-bottom: 0px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  color: #475569;
+}
+
+.username-input-filed {
+  font-size: 14px;
+  height: 25px;
+  background-color: #e2e8f0;
+  border: 2px solid #64748b;
+  border-radius: 2px;
+  margin-top: 5px;
+  padding: 8px 16px 8px 16px;
+}
+
+.password-input-filed {
+  font-size: 14px;
+  height: 25px;
+  border: 1.5px solid #64748b;
+  background-color: #e2e8f0;
+  color: #64748b;
+  border-radius: 2px;
+  margin-top: 5px;
+  padding: 8px 16px 8px 16px;
+}
+
+.login-button {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 14px;
+  color: #ffffff;
+  height: 40px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 2px;
+  background-color: #b3b3b3;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.button2 {
+  background-color: #088c03;
+}
+
+.error-message {
+  align-self: start;
+  font-size: 12px;
+  margin-top: 3px;
+  margin-bottom: 0px;
+  font-family: 'Roboto';
+  line-height: 16px;
+  color: #ff0b37;
+}
