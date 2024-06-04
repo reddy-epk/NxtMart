@@ -1,125 +1,133 @@
-import {Component} from 'react'
-import {ThreeDots} from 'react-loader-spinner'
-import './index.css'
+import { Component } from 'react';
+import { ThreeDots } from 'react-loader-spinner';
+import './index.css';
 
 class Content extends Component {
+  // Initialize state with categories, selected category,..etc;
   state = {
     categories: [],
     selectedCategory: null,
     isLoading: true,
     error: null,
     productQuantities: {},
-  }
+  };
 
+  // Fetch data when the component mounts
   componentDidMount() {
-    this.fetchData()
+    this.fetchData();
   }
 
+  // Fetch data from API
   fetchData = async () => {
     try {
-      const response = await fetch(
-        'https://run.mocky.io/v3/947e05e1-cd6a-4af9-93e7-0727fba9fec4',
-      )
-      const data = await response.json()
-      this.setState({categories: data.categories})
+      // Fetch data from API
+      const response = await fetch('https://run.mocky.io/v3/947e05e1-cd6a-4af9-93e7-0727fba9fec4');
+      const data = await response.json();
+      // Update state with categories
+      this.setState({ categories: data.categories });
     } catch (err) {
-      this.setState({error: err.message})
+      // Handle error
+      this.setState({ error: err.message });
     } finally {
-      this.setState({isLoading: false})
+      // Set loading status to false
+      this.setState({ isLoading: false });
     }
-  }
+  };
 
-  handleCategoryClick = async category => {
-    this.setState({isLoading: true})
+  handleCategoryClick = async (category) => {
+    // Set loading status to true
+    this.setState({ isLoading: true });
     try {
-      const delay = ms => new Promise(res => setTimeout(res, ms))
-      await delay(1000)
-      this.setState({selectedCategory: category})
+      // Delay for 1 second
+      await new Promise((res) => setTimeout(res, 1000));
+      // Update selected category
+      this.setState({ selectedCategory: category });
     } catch (err) {
-      this.setState({error: err.message})
+      // Handle error
+      this.setState({ error: err.message });
     } finally {
-      this.setState({isLoading: false})
+      // Set loading status to false
+      this.setState({ isLoading: false });
     }
-  }
+  };
 
-  handleIncrement = productId => {
-    this.setState(prevState => ({
+  // Increment product quantity
+  handleIncrement = (productId) => {
+    // Update product quantities in state
+    this.setState((prevState) => ({
       productQuantities: {
         ...prevState.productQuantities,
         [productId]: (prevState.productQuantities[productId] || 0) + 1,
       },
-    }))
+    }));
 
-    const product = this.getProductById(productId)
+    // Add product to cart if quantity is greater than 0
+    const product = this.getProductById(productId);
     if (product) {
-      this.addToCart(product)
+      this.addToCart(product);
     }
-  }
+  };
 
-  handleDecrement = productId => {
-    this.setState(prevState => ({
+  // Decrement product quantity
+  handleDecrement = (productId) => {
+    // Update product quantities in state
+    this.setState((prevState) => ({
       productQuantities: {
         ...prevState.productQuantities,
-        [productId]: Math.max(
-          (prevState.productQuantities[productId] || 1) - 1,
-          0,
-        ),
+        [productId]: Math.max((prevState.productQuantities[productId] || 1) - 1, 0),
       },
-    }))
+    }));
 
-    const product = this.getProductById(productId)
+    // Remove product from cart if quantity is 0
+    const product = this.getProductById(productId);
     if (product) {
-      this.removeFromCart(product)
+      this.removeFromCart(product);
     }
-  }
+  };
 
-  getProductById = productId => {
-    const {categories} = this.state
-    const allProducts = categories.reduce(
-      (acc, category) => [...acc, ...category.products],
-      [],
-    )
-    return allProducts.find(product => product.id === productId) || null
-  }
+  // Get product by ID
+  getProductById = (productId) => {
+    // Find product in categories
+    const { categories } = this.state;
+    const allProducts = categories.reduce((acc, category) => [...acc, ...category.products], []);
+    return allProducts.find((product) => product.id === productId) || null;
+  };
 
-  /*
-  getProductById = productId => {
-    const {categories} = this.state
-    for (const category of categories) {
-      for (const product of category.products) {
-        if (product.id === productId) {
-          return product
-        }
-      }
-    }
-    return null
-  }
-  */
-
-  addToCart = product => {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || []
-    const existingItem = cartItems.find(item => item.id === product.id)
+  // Add product to cart
+  addToCart = (product) => {
+    // Get cart items from local storage
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    // Check if product already exists in cart
+    const existingItem = cartItems.find((item) => item.id === product.id);
 
     if (existingItem) {
-      existingItem.quantity += 1
+      // Increment quantity if product exists
+      existingItem.quantity += 1;
     } else {
-      cartItems.push({...product, quantity: 1})
+      // Add new product to cart
+      cartItems.push({ ...product, quantity: 1 });
     }
 
-    localStorage.setItem('cartItems', JSON.stringify(cartItems))
-  }
+    // Update local storage
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  };
 
-  removeFromCart = product => {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || []
-    const updatedCartItems = cartItems.filter(item => item.id !== product.id)
-    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems))
-  }
-  /* eslint-disable */
+  // Remove product from cart
+  removeFromCart = (product) => {
+    // Get cart items from local storage
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    // Filter out product from cart
+    const updatedCartItems = cartItems.filter((item) => item.id !== product.id);
+    // Update local storage
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+  };
+
+  // Render content
   getContent = () => {
-    const {isLoading, error, selectedCategory, categories, productQuantities} =
-      this.state
+    const { isLoading, error, selectedCategory, categories, productQuantities } = this.state;
 
     if (isLoading) {
+      // Render loading spinner
       return (
         <div className="spinner-container">
           <ThreeDots
@@ -133,33 +141,34 @@ class Content extends Component {
             wrapperClass=""
           />
         </div>
-      )
+      );
     }
 
     if (error) {
-      return <h2>Error: {error}</h2>
+      // Render error message
+      return <h2>Error: {error}</h2>;
     }
 
+    // Render content based on selected category
     return (
       <>
         {selectedCategory === null ? (
+          // Render all products
           <h2>All Products</h2>
         ) : (
+          // Render products for selected category
           <h2>{selectedCategory.name}</h2>
         )}
         <ul className="product-list">
           {selectedCategory === null
-            ? categories.map(category => (
+            ? // Render all categories
+              categories.map((category) => (
                 <div key={category.name} className="category-group">
                   <h2>{category.name}</h2>
                   <div className="home-fixer">
-                    {category.products.map(product => (
+                    {category.products.map((product) => (
                       <li key={product.id} className="product-item">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="img"
-                        />
+                        <img src={product.image} alt={product.name} className="img" />
                         <div className="product-details">
                           <div className="info">
                             <p className="pname">{product.name}</p>
@@ -167,6 +176,7 @@ class Content extends Component {
                             <p className="pro-price">{product.price}</p>
                           </div>
                           {productQuantities[product.id] ? (
+                            // Render quantity controls
                             <div className="quantity-controls">
                               <button
                                 type="button"
@@ -187,6 +197,7 @@ class Content extends Component {
                               </button>
                             </div>
                           ) : (
+                            // Render add button
                             <button
                               type="button"
                               id="add-button-card"
@@ -201,7 +212,8 @@ class Content extends Component {
                   </div>
                 </div>
               ))
-            : selectedCategory.products.map(product => (
+            : // Render products for selected category
+              selectedCategory.products.map((product) => (
                 <li key={product.id} className="product-item">
                   <img src={product.image} alt={product.name} className="img" />
                   <div className="product-details">
@@ -211,6 +223,7 @@ class Content extends Component {
                       <p className="pro-price">{product.price}</p>
                     </div>
                     {productQuantities[product.id] ? (
+                      // Render quantity controls
                       <div className="quantity-controls">
                         <button
                           type="button"
@@ -231,6 +244,7 @@ class Content extends Component {
                         </button>
                       </div>
                     ) : (
+                      // Render add button
                       <button
                         type="button"
                         id="add-button-card"
@@ -245,11 +259,12 @@ class Content extends Component {
         </ul>
         <hr />
       </>
-    )
-  }
+    );
+  };
+
 
   renderCategoryButtons = () => {
-    const {selectedCategory, categories} = this.state
+    const { selectedCategory, categories } = this.state;
 
     return (
       <ul className="sidebar-list">
@@ -262,13 +277,11 @@ class Content extends Component {
             All Products
           </button>
         </li>
-        {categories.map(category => (
+        {categories.map((category) => (
           <li key={category.name}>
             <button
               type="button"
-              className={`buttonsy ${
-                selectedCategory?.name === category.name ? 'pk' : ''
-              }`}
+              className={`buttonsy ${selectedCategory?.name === category.name ? 'pk' : ''}`}
               onClick={() => this.handleCategoryClick(category)}
             >
               {category.name}
@@ -276,9 +289,10 @@ class Content extends Component {
           </li>
         ))}
       </ul>
-    )
-  }
+    );
+  };
 
+  // Render component
   render() {
     return (
       <div className="content">
@@ -290,8 +304,8 @@ class Content extends Component {
         </div>
         <div className="main-content">{this.getContent()}</div>
       </div>
-    )
+    );
   }
 }
 
-export default Content
+export default Content;
