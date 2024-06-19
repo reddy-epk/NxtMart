@@ -2,7 +2,8 @@ Building **Nxt Mart** an e-commerce shopping app with a tailored api.
 
 react concepts used: component, displaying that data, routing concepts, authentication and authorization, and adding responsiveness to the website, Implementing SearchBar feature with more safe and stable authentication.
 <br />
-usrename: rahul 
+username: rahul 
+<br />
 password: rahul@2021
 
 ### Prerequisites
